@@ -33,23 +33,25 @@ d3.json("imageserver.geojson", function (data) {
 //   console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
 //   });
 // try to pass coordinatest to physical address
-// des_link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDC8qJSgf_e-ZSRb8c-I4j_Ucyf0R0t9Hk`
 
-//   d3.json(des_link, function (data) {
-//     console.log(data)
-//     // addressTemp = data["results"][0]["formatted_address"]
-//     // d3.select("#from_places").attr("value", `${addressTemp}`)
-
-//   });
-// 
 
 mymap.on('click', function(ev){
   var latlng = mymap.mouseEventToLatLng(ev.originalEvent);
   console.log(latlng.lat + ', ' + latlng.lng);
+  lat = latlng.lat
+  lng = latlng.lng
+
+
+  des_link = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDC8qJSgf_e-ZSRb8c-I4j_Ucyf0R0t9Hk`
+
+  d3.json(des_link, function (data) {
+    console.log(data)
+    addressTemp_dest = data["results"][0]["formatted_address"]
+    d3.select("#to_places").attr("value", `${addressTemp_dest}`)
+
+  });
+
 });
-
-// but looks like not correct 
-
 
 
 // get current location 
